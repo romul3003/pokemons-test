@@ -85,6 +85,9 @@ module.exports = {
     'no-empty-pattern': [0],
     'no-implicit-globals': [2],
     'no-param-reassign': ['error', { props: true, ignorePropertyModificationsFor: ['state'] }],
+    'no-restricted-exports': ['error', {
+      restrictedNamedExports: [],
+    }],
 
     'more/no-void-map': 2,
     'more/no-c-like-loops': 2,

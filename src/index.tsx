@@ -1,34 +1,39 @@
-import { StrictMode } from 'react'
+// import { StrictMode } from 'react'
+import { Provider } from 'react-redux'
 import { CssBaseline, GlobalStyles } from '@mui/material'
 import ReactDOM from 'react-dom/client'
-import App from './App'
+
+import { store } from './redux/store'
+import App from './components/App'
 import reportWebVitals from './reportWebVitals'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 )
 root.render(
-  <StrictMode>
-    <CssBaseline>
-      <GlobalStyles styles={{
-        html: {
-          height: '100%',
-        },
-        body: {
-          backgroundColor: '#f8fafb',
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100%',
-        },
-        '#root': {
-          height: '100%',
-        },
-      }}
-      />
+  // <StrictMode>
+  <CssBaseline>
+    <GlobalStyles styles={{
+      html: {
+        height: '100%',
+      },
+      body: {
+        backgroundColor: '#f8fafb',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+      },
+      '#root': {
+        height: '100%',
+      },
+    }}
+    />
+    <Provider store={store}>
       <App />
-    </CssBaseline>
+    </Provider>
+  </CssBaseline>,
 
-  </StrictMode>,
+  // </StrictMode>,
 )
 
 // If you want to start measuring performance in your app, pass a function

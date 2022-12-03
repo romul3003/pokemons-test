@@ -1,0 +1,2 @@
+export const LIMIT_DEFAULT = 12
+export const OFFSET_DEFAULT = LIMIT_DEFAULT
