@@ -16,13 +16,13 @@ import {
   AccordionDetails,
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { NamedAPIResource } from 'pokenode-ts'
+import { Pokemon } from 'pokenode-ts'
 
-type PokemonCardProps = {
-  pokemon: NamedAPIResource;
+type CharacterCardProps = {
+  character: Pokemon;
 }
 
-const PokemonCard: FC<PokemonCardProps> = ({ pokemon: { name } }) => {
+const CharacterCard: FC<CharacterCardProps> = ({ character: { name } }) => {
   const [expanded, setExpanded] = useState<string | false>(false)
 
   const handleChange = (panel: string) => (event: SyntheticEvent, isExpanded: boolean) => {
@@ -64,4 +64,4 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon: { name } }) => {
   )
 }
 
-export default PokemonCard
+export default CharacterCard

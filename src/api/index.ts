@@ -1,5 +1,5 @@
-import { pokemon } from './pokemonApi'
+import { characters } from './charactersApi'
 
 export const api = Object.freeze({
-  pokemon,
+  characters,
 })

@@ -1,22 +1,22 @@
 import { FC, memo } from 'react'
 import { Pagination } from '@mui/material'
 import { SxProps, Theme } from '@mui/material/styles'
-import { LIMIT_DEFAULT } from '../constants'
+import { OFFSET_DEFAULT } from '../constants'
 
-type PokemonsPaginationProps = {
+type CharacterPaginationProps = {
   page: number;
   total: number;
   sx?: SxProps<Theme>;
   onChange: (newPage: number) => void;
 }
 
-const PokemonsPagination: FC<PokemonsPaginationProps> = ({
+const CharacterPagination: FC<CharacterPaginationProps> = ({
   page,
   total,
   sx = [],
   onChange,
 }) => {
-  const totalPages = Math.ceil(total / LIMIT_DEFAULT)
+  const totalPages = Math.ceil(total / OFFSET_DEFAULT)
 
   return (
     <Pagination
@@ -34,4 +34,4 @@ const PokemonsPagination: FC<PokemonsPaginationProps> = ({
   )
 }
 
-export default memo(PokemonsPagination)
+export default memo(CharacterPagination)
