@@ -8,7 +8,9 @@ import {
 import { styled } from '@mui/material/styles'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import { selectCharacters } from '../redux/selectors/charactersSelectors'
-import { getCharactersAsync, loadCharacters } from '../redux/slices/CharactersSlice'
+import { getCharactersAsync, loadCharacters } from '../redux/slices/charactersSlice'
+import { getTypesAsync } from '../redux/slices/typesSlice'
+
 import CharacterCard from './CharacterCard'
 import CharacterPagination from './CharacterPagination'
 import { LIMIT_DEFAULT } from '../constants'
@@ -21,7 +23,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }))
 
-const PokemonList: FC = () => {
+const CharacterList: FC = () => {
   const dispatch = useAppDispatch()
   const {
     filteredList, search, page, count,
@@ -37,6 +39,7 @@ const PokemonList: FC = () => {
 
   useEffect(() => {
     dispatch(getCharactersAsync())
+    dispatch(getTypesAsync())
   }, [dispatch])
 
   return (
@@ -85,4 +88,4 @@ const PokemonList: FC = () => {
   )
 }
 
-export default memo(PokemonList)
+export default memo(CharacterList)

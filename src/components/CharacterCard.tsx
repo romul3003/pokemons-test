@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-  FC, useState, SyntheticEvent,
+  FC, useState, SyntheticEvent, useMemo,
 } from 'react'
 import {
   Card,
@@ -22,12 +22,34 @@ type CharacterCardProps = {
   character: Pokemon;
 }
 
-const CharacterCard: FC<CharacterCardProps> = ({ character: { name } }) => {
+const ARRAY_LIMIT = 5 // for convenience
+
+// const getAbilitiesNames = <T, K extends keyof T>(abilities: T[], key: K): string => {
+//   return abilities.slice(0, ARRAY_LIMIT)
+//   .map(m => m[key].name)
+//   .join(', '),
+// }
+
+const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
+  const {
+    name, sprites, moves, stats,
+  } = character
+
   const [expanded, setExpanded] = useState<string | false>(false)
 
   const handleChange = (panel: string) => (event: SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false)
   }
+
+  const movesList = useMemo(
+    () => moves.slice(0, ARRAY_LIMIT).map(m => m.move.name).join(', '),
+    [moves],
+  )
+
+  const statsList = useMemo(
+    () => stats.slice(0, ARRAY_LIMIT).map(s => s.stat.name).join(', '),
+    [stats],
+  )
 
   return (
     <Card>
@@ -55,8 +77,25 @@ const CharacterCard: FC<CharacterCardProps> = ({ character: { name } }) => {
               {expanded ? 'See less..' : 'See more..'}
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
-            Additional info
+          <AccordionDetails sx={{ textAlign: 'left' }}>
+            <CardMedia
+              component="img"
+              src={sprites?.front_default || ''}
+              alt="Pokemon"
+              sx={{ width: '6rem', margin: '0 auto' }}
+            />
+            <Typography>
+              <b>Name: </b>
+              {name}
+            </Typography>
+            <Typography>
+              <b>Moves: </b>
+              {movesList}
+            </Typography>
+            <Typography>
+              <b>Stats: </b>
+              {statsList}
+            </Typography>
           </AccordionDetails>
         </Accordion>
       </CardContent>

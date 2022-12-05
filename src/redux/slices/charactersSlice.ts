@@ -16,7 +16,7 @@ export const getCharactersAsync = createAsyncThunk<
   'characters/getCharacters',
   async ({ offset, limit } = {}, thunkApi) => {
     try {
-      const { results } = await api.characters.getPokemons(offset, limit)
+      const { results } = await api.characters.getPokemonsList(offset, limit)
       const responses = await api.characters.getPokemonsDetails(results.map(r => r.name))
 
       return responses

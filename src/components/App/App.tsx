@@ -1,10 +1,10 @@
 import { FC } from 'react'
 import Layout from '../Layout'
-import PokemonList from '../CharacterList'
+import CharacterList from '../CharacterList'
 
 const App: FC = () => (
   <Layout>
-    <PokemonList />
+    <CharacterList />
   </Layout>
 )
 
