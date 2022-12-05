@@ -24,12 +24,6 @@ type CharacterCardProps = {
 
 const ARRAY_LIMIT = 5 // for convenience
 
-// const getAbilitiesNames = <T, K extends keyof T>(abilities: T[], key: K): string => {
-//   return abilities.slice(0, ARRAY_LIMIT)
-//   .map(m => m[key].name)
-//   .join(', '),
-// }
-
 const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
   const {
     name, sprites, moves, stats,

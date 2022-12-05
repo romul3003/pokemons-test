@@ -3,7 +3,7 @@ import {
   FC, memo, useCallback, useEffect,
 } from 'react'
 import {
-  Box, Grid, Paper, TextField,
+  Box, Grid, Paper, TextField, Stack,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
@@ -14,6 +14,7 @@ import { getTypesAsync } from '../redux/slices/typesSlice'
 import CharacterCard from './CharacterCard'
 import CharacterPagination from './CharacterPagination'
 import { LIMIT_DEFAULT } from '../constants'
+import TypesSelect from './TypesSelect'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -44,11 +45,21 @@ const CharacterList: FC = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <TextField
-        onChange={searchCharacters}
-        label="Search characters..."
-        sx={{ mb: '4rem' }}
-      />
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
+        mb="4rem"
+      >
+        <TextField
+          onChange={searchCharacters}
+          label="Search characters..."
+          sx={{ width: '50%' }}
+        />
+        <TypesSelect />
+      </Stack>
+
       {!!filteredList.length && (
         <Grid
           container
