@@ -36,7 +36,7 @@ const TypesSelect: FC<TypesSelectProps> = ({ changeType }) => {
   }, [charactersType, changeType])
 
   return typesList.length ? (
-    <Box sx={{ minWidth: 120, width: '50%' }}>
+    <Box sx={{ width: '100%' }}>
       <FormControl fullWidth>
         <InputLabel id="types-label">Type</InputLabel>
         <Select

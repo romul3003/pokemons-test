@@ -14,7 +14,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => (
   >
     <Header />
     <Main sx={{ height: '100%' }}>
-      <Container sx={{ height: '100%', padding: '4rem 0' }}>
+      <Container sx={{ height: '100%', pt: '4rem', pb: '4rem' }}>
         {children}
       </Container>
     </Main>

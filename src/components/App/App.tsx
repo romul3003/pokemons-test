@@ -48,7 +48,7 @@ const App: FC = () => {
     <Layout>
       <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         <Stack
-          direction="row"
+          direction={{ xs: 'column', sm: 'row' }}
           justifyContent="center"
           alignItems="center"
           spacing={2}
@@ -57,7 +57,7 @@ const App: FC = () => {
           <TextField
             onChange={searchCharacters}
             label="Search characters..."
-            sx={{ width: '50%' }}
+            sx={{ width: '100%' }}
           />
           <TypesSelect changeType={changeType} />
         </Stack>
