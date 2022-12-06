@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   createSlice, createAsyncThunk, PayloadAction,
 } from '@reduxjs/toolkit'
@@ -30,6 +29,7 @@ type CharactersState = {
   list: Pokemon[];
   filteredList: Pokemon[];
   search: string;
+  characterType: string;
   page: number;
   count: number;
   loading: boolean;
@@ -40,6 +40,7 @@ const initialState: CharactersState = {
   list: [],
   filteredList: [],
   search: '',
+  characterType: 'all',
   page: 1,
   count: 0,
   loading: false,
@@ -52,16 +53,25 @@ export const characters = createSlice({
   reducers: {
     setNewPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload
-      // localStorage.setItem('pageNumber', String(action.payload))
     },
-    loadCharacters: (state, action: PayloadAction<{newPage: number, search: string}>) => {
-      const { newPage, search } = action.payload
-      const filteredList = state.list.filter(item => item.name.includes(search))
+    loadCharacters: (state, action: PayloadAction<{
+      newPage: number;
+      search: string;
+      characterType: string;
+    }>) => {
+      const { newPage, search, characterType } = action.payload
+
+      const filteredByTypeList = characterType !== 'all'
+        ? state.list.filter(item => item.types[0].type.name === characterType)
+        : state.list
+
+      const filteredByNameList = filteredByTypeList.filter(item => item.name.includes(search))
 
       state.page = newPage
       state.search = search
-      state.filteredList = setPage(newPage, filteredList)
-      state.count = filteredList.length
+      state.filteredList = getListWithOffset(newPage, filteredByNameList)
+      state.count = filteredByNameList.length
+      state.characterType = characterType
     },
   },
   extraReducers: (builder) => {
@@ -72,7 +82,7 @@ export const characters = createSlice({
     builder.addCase(getCharactersAsync.fulfilled, (state, action) => {
       state.loading = false
       state.list = action.payload
-      state.filteredList = setPage(1, action.payload)
+      state.filteredList = getListWithOffset(1, action.payload)
       state.count = action.payload.length
     })
     builder.addCase(getCharactersAsync.rejected, (state, action) => {
@@ -91,7 +101,7 @@ export const { setNewPage, loadCharacters } = characters.actions
 
 export default characters.reducer
 
-function setPage(newPage = 1, arr: Pokemon[]) {
+function getListWithOffset(newPage = 1, arr: Pokemon[]) {
   const offset = (newPage - 1) * OFFSET_DEFAULT
   return arr.slice(offset, offset + OFFSET_DEFAULT)
 }

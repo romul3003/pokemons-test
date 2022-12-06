@@ -26,7 +26,7 @@ type TypesState = {
 }
 
 const initialState: TypesState = {
-  typesList: [],
+  typesList: ['all'],
   loading: false,
   error: null,
 }
@@ -42,7 +42,7 @@ export const types = createSlice({
     })
     builder.addCase(getTypesAsync.fulfilled, (state, action) => {
       state.loading = false
-      state.typesList = action.payload
+      state.typesList.push(...action.payload)
     })
     builder.addCase(getTypesAsync.rejected, (state, action) => {
       state.loading = false

@@ -26,7 +26,7 @@ const ARRAY_LIMIT = 5 // for convenience
 
 const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
   const {
-    name, sprites, moves, stats,
+    name, sprites, moves, stats, types,
   } = character
 
   const [expanded, setExpanded] = useState<string | false>(false)
@@ -89,6 +89,10 @@ const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
             <Typography>
               <b>Stats: </b>
               {statsList}
+            </Typography>
+            <Typography>
+              <b>Type: </b>
+              {types[0].type.name}
             </Typography>
           </AccordionDetails>
         </Accordion>

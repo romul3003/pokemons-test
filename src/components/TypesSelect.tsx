@@ -1,7 +1,11 @@
-import { FC, useState } from 'react'
+import {
+  FC, useState, memo, useEffect,
+} from 'react'
 import {
   Select, SelectChangeEvent, Box, InputLabel, MenuItem, FormControl,
 } from '@mui/material'
+import { useAppSelector } from '../redux/hooks'
+import { selectTypes } from '../redux/selectors/typesSelectors'
 
 const ITEM_HEIGHT = 48
 const ITEM_PADDING_TOP = 8
@@ -15,17 +19,26 @@ const MenuProps = {
   },
 }
 
-const TypesSelect: FC = () => {
-  const [charactersType, setCharactersType] = useState('')
+type TypesSelectProps = {
+  changeType: (value: string) => void
+}
+
+const TypesSelect: FC<TypesSelectProps> = ({ changeType }) => {
+  const [charactersType, setCharactersType] = useState('all')
+  const { typesList } = useAppSelector(selectTypes)
 
   const handleChange = (event: SelectChangeEvent) => {
     setCharactersType(event.target.value as string)
   }
 
-  return (
+  useEffect(() => {
+    changeType(charactersType)
+  }, [charactersType, changeType])
+
+  return typesList.length ? (
     <Box sx={{ minWidth: 120, width: '50%' }}>
       <FormControl fullWidth>
-        <InputLabel id="types-label">Age</InputLabel>
+        <InputLabel id="types-label">Type</InputLabel>
         <Select
           labelId="types-label"
           id="types--select"
@@ -33,21 +46,20 @@ const TypesSelect: FC = () => {
           label="Type"
           onChange={handleChange}
           MenuProps={MenuProps}
+          defaultValue="all"
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-          <MenuItem value={40}>40</MenuItem>
-          <MenuItem value={50}>50</MenuItem>
-          <MenuItem value={60}>60</MenuItem>
-          <MenuItem value={70}>70</MenuItem>
-          <MenuItem value={80}>80</MenuItem>
-          <MenuItem value={90}>90</MenuItem>
-          <MenuItem value={100}>100</MenuItem>
+          {typesList.map(typeName => (
+            <MenuItem
+              key={typeName}
+              value={typeName}
+            >
+              {typeName}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </Box>
-  )
+  ) : null
 }
 
-export default TypesSelect
+export default memo(TypesSelect)
