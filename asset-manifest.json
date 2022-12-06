@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/pokemons-test/static/js/main.3fd658cc.js",
+    "main.js": "/pokemons-test/static/js/main.a3124c6c.js",
     "static/js/787.93f90f16.chunk.js": "/pokemons-test/static/js/787.93f90f16.chunk.js",
     "index.html": "/pokemons-test/index.html",
-    "main.3fd658cc.js.map": "/pokemons-test/static/js/main.3fd658cc.js.map",
+    "main.a3124c6c.js.map": "/pokemons-test/static/js/main.a3124c6c.js.map",
     "787.93f90f16.chunk.js.map": "/pokemons-test/static/js/787.93f90f16.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.3fd658cc.js"
+    "static/js/main.a3124c6c.js"
   ]
 }
