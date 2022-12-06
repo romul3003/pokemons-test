@@ -3,7 +3,7 @@ import {
 } from '@reduxjs/toolkit'
 import { Pokemon } from 'pokenode-ts'
 import { api } from '../../api'
-import { OFFSET_DEFAULT } from '../../constants'
+import { getListWithOffset } from '../../helpers'
 import { ErrorResponse } from '../../types'
 import { PaginationRequest } from '../types/pokemonsTypes'
 
@@ -51,9 +51,6 @@ export const characters = createSlice({
   name: 'characters',
   initialState,
   reducers: {
-    setNewPage: (state, action: PayloadAction<number>) => {
-      state.page = action.payload
-    },
     loadCharacters: (state, action: PayloadAction<{
       newPage: number;
       search: string;
@@ -97,11 +94,6 @@ export const characters = createSlice({
   },
 })
 
-export const { setNewPage, loadCharacters } = characters.actions
+export const { loadCharacters } = characters.actions
 
 export default characters.reducer
-
-function getListWithOffset(newPage = 1, arr: Pokemon[]) {
-  const offset = (newPage - 1) * OFFSET_DEFAULT
-  return arr.slice(offset, offset + OFFSET_DEFAULT)
-}

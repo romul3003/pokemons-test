@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import {
   FC, useState, SyntheticEvent, useMemo,
 } from 'react'
@@ -6,11 +6,7 @@ import {
   Card,
   CardContent,
   Typography,
-  CardActions,
-  Button,
   CardMedia,
-  Link,
-  Stack,
   Accordion,
   AccordionSummary,
   AccordionDetails,
@@ -49,11 +45,14 @@ const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
     <Card>
       <CardContent>
         <Typography
-          gutterBottom
           variant="h5"
           component="p"
         >
           {name}
+        </Typography>
+        <Typography gutterBottom>
+          <b>Type: </b>
+          {types[0].type.name}
         </Typography>
         <Accordion
           expanded={expanded === 'panel1'}
@@ -89,10 +88,6 @@ const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
             <Typography>
               <b>Stats: </b>
               {statsList}
-            </Typography>
-            <Typography>
-              <b>Type: </b>
-              {types[0].type.name}
             </Typography>
           </AccordionDetails>
         </Accordion>
